@@ -1,0 +1,25 @@
+<div id="app">
+<!-- render 함수를 통해 렌더링 되는 영역 -->
+</div>
+
+<script>
+    var data = {
+        message: 10
+    }
+
+    function render(sth) {
+        var div = document.querySelector('#app');
+        div.innerHTML = sth;
+    }
+
+    var app = new Proxy(data, {
+        get() { // data의 속성에 접근할 때마다 동작
+            console.log('값 접근') 
+        },
+        set(target, prop, newValue) { // 객체, 객체의 속성, 객체의 값
+            console.log('값 갱신');
+            target[prop] = newValue; // 객체에 새로운 값을 넣어준다.
+            render(newValue);
+        }
+    })
+</script>
